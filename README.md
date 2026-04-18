@@ -4,7 +4,7 @@
 
 Nicolás Gonzalo Cordero Varas / 20.543.155-1 
 
-Vicente Alfonso Ruiz Escobar / "rut"
+Vicente Alonso Ruiz Escobar / 21.464.046-5
 
 Martín Alejandro Ubilla Briceño / 20.751.624-4
 
