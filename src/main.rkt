@@ -3,6 +3,15 @@
 (require "./operations.rkt")
 (require "./custom-exception.rkt")
 
+(define (leer-numero mensaje)
+  (display mensaje)
+  (let ([valor (read)])
+    (if (number? valor)
+        valor
+        (raise (entrada-no-numerica-error 
+                "No se ingresó un número válido." 
+                (current-continuation-marks))))))
+
 ; menu loop 
 (define (menu)
   (let loop ()
@@ -23,57 +32,65 @@
       (let ((opcion (read)))
         (cond
           ((= opcion 1)
-          ; suma
+           ; suma
            (begin
-             (display "Ingresa valor 'a': ")
-             (let ((a (read)))
-               (display "Ingresa valor 'b': ")
-               (let ((b (read)))
-                 (display "\n[Resultado: ")
-                 (display (suma a b))
-                 (display "]\n")))
-             (loop)))
+             (with-handlers ([entrada-no-numerica-error?
+                              (lambda (e)
+                                (display "\nError: ")
+                                (displayln (exn-message e))
+                                (loop))])
+               (let ((a (leer-numero "Ingresa valor 'a': ")))
+                 (let ((b (leer-numero "Ingresa valor 'b': ")))
+                   (display "\nResultado: ")
+                   (displayln (suma a b))
+                   (loop))))))
           
           ((= opcion 2)
           ; resta
            (begin
-             (display "Ingresa valor 'a': ")
-             (let ((a (read)))
-               (display "Ingresa valor 'b': ")
-               (let ((b (read)))
-                 (display "\n[Resultado: ")
-                 (display (resta a b))
-                 (display "]\n")))
-             (loop)))
+             (with-handlers ([entrada-no-numerica-error?
+                              (lambda (e)
+                                (display "\nError: ")
+                                (displayln (exn-message e))
+                                (loop))])
+               (let ((a (leer-numero "Ingresa valor 'a': ")))
+                 (let ((b (leer-numero "Ingresa valor 'b': ")))
+                   (display "\nResultado: ")
+                   (displayln (resta a b))
+                   (loop))))))
           
           ((= opcion 3)
           ; multiplicación
            (begin
-             (display "Ingresa valor 'a': ")
-             (let ((a (read)))
-               (display "Ingresa valor 'b': ")
-               (let ((b (read)))
-                 (display "\n[Resultado: ")
-                 (display (multiplicacion a b))
-                 (display "]\n")))
-             (loop)))
+             (with-handlers ([entrada-no-numerica-error?
+                              (lambda (e)
+                                (display "\nError: ")
+                                (displayln (exn-message e))
+                                (loop))])
+               (let ((a (leer-numero "Ingresa valor 'a': ")))
+                 (let ((b (leer-numero "Ingresa valor 'b': ")))
+                   (display "\nResultado: ")
+                   (displayln (multiplicacion a b))
+                   (loop))))))
           
           ((= opcion 4)
-            ; división
-           (begin
-             (display "Ingresa valor 'a': ")
-             (let ((a (read)))
-               (display "Ingresa valor 'b': ")
-               (let ((b (read)))
-                 (with-handlers ([division-por-cero-error?
-                                  (lambda (e)
-                                    (display "\n¡Error! ")
-                                    (display (exn-message e))
-                                    (display "\n"))])
-                   (display "\n[Resultado: ")
-                   (display (division a b))
-                   (display "]\n"))))
-             (loop)))
+           ; división
+           (with-handlers ([entrada-no-numerica-error?
+                            (lambda (e)
+                              (display "\n¡Error de entrada!: ")
+                              (displayln (exn-message e))
+                              (loop))]
+                           [division-por-cero-error?
+                            (lambda (e)
+                              (display "\n¡Error matemático!: ")
+                              (displayln (exn-message e))
+                              (loop))])
+             (let ((a (leer-numero "Ingresa valor 'a': ")))
+               (let ((b (leer-numero "Ingresa valor 'b': ")))
+                 (display "\n[Resultado: ")
+                 (display (division a b))
+                 (display "]\n")
+                 (loop)))))
           
           ((= opcion 5)
            (display "\nPrograma Terminado\n"))
