@@ -1,4 +1,12 @@
 # Taller 1: Lenguajes de Programación
+ 
+## Integrantes - Grupo K:
+
+Nicolás Gonzalo Cordero Varas / 20.543.155-1 
+
+Vicente Alfonso Ruiz Escobar / "rut"
+
+Martín Alejandro Ubilla Briceño / 20.751.624-4
 
 ## 1. Información General
 * **Propósito del programa:** El programa consiste en una calculadora interactiva que se ejecuta a través de la terminal. Permite al usuario realizar operaciones matemáticas básicas (suma, resta, multiplicación y división) mediante un menú.
@@ -27,8 +35,9 @@
 * **Nombre:** `division-por-cero-error`
 * **Gatillos:** La excepción se lanza exclusivamente dentro de la función `division` (ubicada en `operations.rkt`) cuando el sistema detecta que el usuario ha ingresado el valor `0` para el operando `b` (el divisor).
 * **Componentes:** Es una estructura (`struct`) que hereda de `exn:fail:user`, la cual es una clase base en Racket diseñada para errores generados por el usuario.
-  * Al elevarse (`raise`), recibe un mensaje descriptivo (`"no se puede dividir entre cero"`) y las marcas de continuación actuales (`current-continuation-marks`) para rastrear el contexto del error.
-* **Funcionamiento:** 1. Al intentar dividir por cero, la función matemática detiene su ejecución inmediatamente y lanza la excepción.
+  * Al elevarse (`raise`), recibe un mensaje descriptivo (`"no se puede dividir entre cero"`) y se utiliza la instrucción (`current-continuation-marks`) para rastrear el contexto del error.
+* **Funcionamiento:** 
+1. Al intentar dividir por cero, la función matemática detiene su ejecución inmediatamente y lanza la excepción.
   2. El control del programa regresa al archivo principal `main.rkt`.
   3. El bloque `with-handlers` configurado en la opción 4 del menú intercepta específicamente el tipo `division-por-cero-error?`.
   4. El handler extrae el mensaje de la excepción mediante `exn-message` y lo muestra en pantalla al usuario.
