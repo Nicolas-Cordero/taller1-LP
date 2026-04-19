@@ -51,3 +51,5 @@ Martín Alejandro Ubilla Briceño / 20.751.624-4
 2. La función de validación de lectura detecta el tipo de dato incorrecto y utiliza la instrucción `raise` para elevar la excepción y mostrar un mensaje.
 3. El bloque with-handlers usa `entrada-no-numerica-error?` para evitar que el error se propague y que se detenga el programa.
 4. El handler extrae el mensaje y permite que el programa regrese al inicio del menú interactivo mediante el loop.
+
+* **Objetivo:** Esta excepción busca mantener la integridad de los datos de entrada antes de realizar cálculos aritméticos. Al manejar esta excepción, se previene que el programa falle por una operación inválida entre tipos de datos incompatibles como intentar sumar un número con una letra.
