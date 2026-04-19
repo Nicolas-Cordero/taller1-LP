@@ -31,7 +31,7 @@ Martín Alejandro Ubilla Briceño / 20.751.624-4
   * **Opción fuera de rango:** Si se ingresa un número distinto a las opciones 1-5, el programa indicará `"Opción inválida"` y solicitará un nuevo input.
   * **Salida:** Al ingresar la opción 5, el programa finaliza su ejecución imprimiendo `"Programa Terminado"`.
 
-## 3. Excepción Personalizada
+## 3. Excepciones Personalizadas
 * **Nombre:** `division-por-cero-error`
 * **Gatillos:** La excepción se lanza exclusivamente dentro de la función `division` (ubicada en `operations.rkt`) cuando el sistema detecta que el usuario ha ingresado el valor `0` para el operando `b` (el divisor).
 * **Componentes:** Es una estructura (`struct`) que hereda de `exn:fail:user`, la cual es una clase base en Racket diseñada para errores generados por el usuario.
@@ -42,3 +42,12 @@ Martín Alejandro Ubilla Briceño / 20.751.624-4
   3. El bloque `with-handlers` configurado en la opción 4 del menú intercepta específicamente el tipo `division-por-cero-error?`.
   4. El handler extrae el mensaje de la excepción mediante `exn-message` y lo muestra en pantalla al usuario.
 * **Objetivo:** El objetivo principal de esta excepción es prevenir que el programa intente realizar una operación matemáticamente indefinida, lo cual causaría un fallo crítico a nivel del intérprete. Al manejarla de esta manera, se asegura la estabilidad del software, permitiendo que el usuario se informe del error y pueda continuar utilizando la calculadora.
+
+* **Nombre:** `entrada-no-numerica-error`
+* **Gatillos:** La exepción se lanza en cualquiera de las operaciones que el usuario seleccione desde el menú, siendo estas `(suma, resta, multiplicación, división)`cuando el sistema detecta un input invalido para las variables `a` o `b`.
+*  **Componentes:** Es otra estructura (`struct`) que hereda de `exn:fail:user`.
+* **Funcionamiento:**
+1. A la hora de ingresar un valor para `a` o para `b`, si se ingresa cualquier carácter o dato que no sea un número, la operación se detiene y se lanza la excepción, volviendo al menú de la calculadora.
+2. La función de validación de lectura detecta el tipo de dato incorrecto y utiliza la instrucción `raise` para elevar la excepción y mostrar un mensaje.
+3. El bloque with-handlers usa `entrada-no-numerica-error?` para evitar que el error se propague y que se detenga el programa.
+4. El handler extrae el mensaje y permite que el programa regrese al inicio del menú interactivo mediante el loop.
