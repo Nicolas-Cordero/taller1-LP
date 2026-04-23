@@ -12,7 +12,7 @@ Martín Alejandro Ubilla Briceño / 20.751.624-4
 * **Propósito del programa:** El programa consiste en una calculadora interactiva que se ejecuta a través de la terminal. Permite al usuario realizar operaciones matemáticas básicas (suma, resta, multiplicación y división) mediante un menú.
 * **Lenguaje de programación:** Racket.
 * **Estructura de archivos:** El proyecto sigue la jerarquía solicitada y separa la lógica de las operaciones y las excepciones para mantener un código modular.
-  * `Taller1-{ID}.zip`
+  * `Taller1-{EkipoK}.zip`
     * `README.md`: Archivo de documentación.
     * `src/`: Carpeta que contiene el código fuente.
       * `main.rkt`: Programa principal que contiene el menú interactivo y el manejo de excepciones.
